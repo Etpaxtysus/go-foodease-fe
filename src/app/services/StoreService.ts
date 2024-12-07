@@ -25,7 +25,7 @@ export type IStore = {
 
 export type IStoreLoginResult = {
     store: IStore;
-    authorization: string;
+    token: string;
 }
 
 export async function login(request: IStoreLoginRequest){
@@ -36,7 +36,7 @@ export async function login(request: IStoreLoginRequest){
             store_password: request.store_password
         })
 
-        const authToken = response.data.data.authorization
+        const authToken = response.data.data.token
         await setAuthToken(authToken)
 
         return 1;
@@ -53,7 +53,7 @@ export async function getCurrentStore(){
 
         const response = await apiClient.get<ResponseSchema<IStore>>("/store/current", {
           headers: { 
-            Authorization: `Bearer ${token}`
+            token: `Bearer ${token}`
           }
         });
     

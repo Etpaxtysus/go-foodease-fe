@@ -1,4 +1,5 @@
 "use server"
+import { PassThrough } from "stream";
 import apiClient, { ResponseSchema } from "./apiClient";
 import { deleteAuthToken, getAuthToken, setAuthToken } from "./AuthTokenService";
 
@@ -26,17 +27,17 @@ export type IUser = {
 
 export type IUserLoginResult = {
     user: IUser;
-    authorization: string;
+    token: string;
 }
 
 export async function login(request: IUserLoginRequest){
     try {
-        const response = await apiClient.post<ResponseSchema<IUserLoginResult>>("/user/login", {
+        const response = await apiClient.post<ResponseSchema<IUserLoginResult>>("/customer/login", {
             email: request.email,
-            customer_password: request.password
+            password: request.password
         })
 
-        const authToken = response.data.data.authorization
+        const authToken = response.data.data.token
         await setAuthToken(authToken)
 
         return 1
@@ -49,12 +50,12 @@ export async function login(request: IUserLoginRequest){
 
 export async function register(request: IUserRegisterRequest){
     try {
-        await apiClient.post<ResponseSchema<IUser>>("/user/register", {
+        await apiClient.post<ResponseSchema<IUser>>("/customer/register", {
             email: request.email,
             first_name: request.first_name,
             last_name: request.last_name,
-            customer_password: request.customer_password,
-            confirm_password: request.confirm_password
+            password: request.customer_password,
+            // confirm_password: request.confirm_password
         })
         return 1;
     } catch (error) {
@@ -67,7 +68,7 @@ export async function getCurrentUser(){
     try {
         const token = await getAuthToken();
 
-        const response = await apiClient.get<ResponseSchema<IUser>>("/user/current", {
+        const response = await apiClient.get<ResponseSchema<IUser>>("/customer/current", {
           headers: { 
             Authorization: `Bearer ${token}`
           }

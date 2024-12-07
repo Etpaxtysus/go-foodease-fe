@@ -7,8 +7,8 @@ export type ResponseSchema<T> = {
 }
 
 const apiClient = axios.create({
-  baseURL: "https://plankton-app-uwgos.ondigitalocean.app/api/v1",
-  // baseURL: "http://localhost:8080/api/v1"
+  // baseURL: "https://plankton-app-uwgos.ondigitalocean.app/api/v1",
+  baseURL: "http://localhost:8888/api/"
 });
 
 export default apiClient;
