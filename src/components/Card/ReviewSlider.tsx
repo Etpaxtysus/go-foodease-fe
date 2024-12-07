@@ -5,11 +5,6 @@ import '@smastrom/react-rating/style.css';
 
 const reviews = [
   {
-    name: "Sarah M.",
-    rating: 5,
-    review: "“Lorem ipsum awai yuki no youni futari to ochiteku zutto anata wa asu wa monogatari suida anata ni nogoshitta negai sakura no you ni ima wa tada fukareru sucikara hokorie kasaneta hibi wo”"
-  },
-  {
     name: "Aloysius Juan F.",
     rating: 5,
     review: "“Lorem ipsum awai yuki no youni futari to ochiteku zutto anata wa asu wa monogatari suida anata ni nogoshitta negai sakura no you ni ima wa tada fukareru sucikara hokorie kasaneta hibi wo”"
@@ -20,11 +15,15 @@ const reviews = [
     review: "“Lorem ipsum awai yuki no youni futari to ochiteku zutto anata wa asu wa monogatari suida anata ni nogoshitta negai sakura no you ni ima wa tada fukareru sucikara hokorie kasaneta hibi wo”"
   },
   {
-    name: "Birhasani R.",
+    name: "Ignatius Ida Bagus A.",
     rating: 5,
     review: "“Lorem ipsum awai yuki no youni futari to ochiteku zutto anata wa asu wa monogatari suida anata ni nogoshitta negai sakura no you ni ima wa tada fukareru sucikara hokorie kasaneta hibi wo”"
   },
-  
+  {
+    name: "Abiyu Ramadhan K.",
+    rating: 5,
+    review: "“Lorem ipsum awai yuki no youni futari to ochiteku zutto anata wa asu wa monogatari suida anata ni nogoshitta negai sakura no you ni ima wa tada fukareru sucikara hokorie kasaneta hibi wo”"
+  },
 ];
 
 const Star = <path d="M440 60l120 336h320L618 592l94 348-272-208-272 208 94-348L0 396h320L440 60" />
