@@ -51,13 +51,13 @@ export async function getCurrentStore(){
     try {
         const token = await getAuthToken();
 
-        const response = await apiClient.get<ResponseSchema<IStore>>("/store/current", {
+        const response = await apiClient.get<ResponseSchema<IStore>>("/store/me", {
           headers: { 
-            token: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
           }
         });
-    
-        return response.data.data;
+        console.log(response);
+        return response.data;
     } catch (error) {
         console.error(error)
         return undefined;

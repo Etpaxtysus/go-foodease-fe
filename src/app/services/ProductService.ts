@@ -77,11 +77,12 @@ export async function getProductDetailsById(productId: string){
 export async function getAllStoreProducts(){
     try {
         const authToken = await getAuthToken()
-        const response = await apiClient.get<ResponseSchema<any>>("/product/store-products", {
+        const response = await apiClient.get<ResponseSchema<any>>("/product/store", {
             headers: {
                 Authorization: `Bearer ${authToken}`
             }
         })
+        console.log("response")
         return response.data.data
     } catch (error) {
         console.error(error)
