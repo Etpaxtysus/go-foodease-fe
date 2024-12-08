@@ -68,7 +68,7 @@ export async function getCurrentUser(){
     try {
         const token = await getAuthToken();
 
-        const response = await apiClient.get<ResponseSchema<IUser>>("/customer/current", {
+        const response = await apiClient.get<ResponseSchema<IUser>>("/customer/me", {
           headers: { 
             Authorization: `Bearer ${token}`
           }

@@ -12,10 +12,10 @@ export default function Navbar() {
             <span className='flex w-16 lg:w-24'><img src='../../logos/5.svg' alt="logos" className='w-full h-full'/></span>
           </Link>
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="#products">
+            <Link href="/#products">
               <p className="hover:underline">Products</p>
             </Link>
-            <Link href="#about">
+            <Link href="/#about">
               <p className="hover:underline">About Us</p>
             </Link>
             <Link href="/auth/login">
@@ -42,6 +42,14 @@ export default function Navbar() {
               <button className="lg:hidden flex p-2 text-[#323232] text-d-h4">
                 <IoMdSearch/>
               </button>
+
+              {/* Profile Icon linking to /user/profile */}
+              <Link href="/user/profile">
+                <p>
+                  <IoPersonCircleSharp className="text-2xl text-[#323232]" />
+                </p>
+              </Link>
+
             </div>
         </div>
       </div>

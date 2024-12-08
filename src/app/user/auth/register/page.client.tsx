@@ -78,12 +78,12 @@ const UserRegisterPage: React.FC<{}> = () => {
                   </span>
                 </div>
 
-                <div className="flex border-[1px] bg-[#F6F6F6] border-[#D2D2D2] px-4 py-3 rounded-lg text-d-b2">
+                {/* <div className="flex border-[1px] bg-[#F6F6F6] border-[#D2D2D2] px-4 py-3 rounded-lg text-d-b2">
                   <Field className="bg-transparent outline-none text-d-b2" placeholder="Enter password again" id="confirm_password" type="password" name="confirm_password"/>
                   <span className="flex w-full h-full items-center justify-end text-lg text-gray-500">
                     <IoEye/>
                   </span>
-                </div>
+                </div> */}
                 
                 <ButtonPrimaryEnable text="Register"/>
               </Form>
