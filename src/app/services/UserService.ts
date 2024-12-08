@@ -67,14 +67,34 @@ export async function register(request: IUserRegisterRequest){
 export async function getCurrentUser(){
     try {
         const token = await getAuthToken();
+        console.log(token);
 
         const response = await apiClient.get<ResponseSchema<IUser>>("/customer/me", {
           headers: { 
             Authorization: `Bearer ${token}`
           }
         });
-    
-        return response.data.data;
+        console.log(response.data, "ini data user");
+        return response.data;
+        
+    } catch (error) {
+        console.error(error);
+        return undefined;
+    }
+}
+
+export async function getUserAddress(){
+    try {
+        const token = await getAuthToken();
+        console.log(token);
+
+        const response = await apiClient.get<ResponseSchema<any>>("/address/all", {
+          headers: { 
+            Authorization: `Bearer ${token}`
+          }
+        });
+        console.log(response.data,"ini address");
+        return response.data;
         
     } catch (error) {
         console.error(error);
