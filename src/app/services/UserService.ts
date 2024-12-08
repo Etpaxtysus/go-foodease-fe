@@ -93,13 +93,45 @@ export async function getUserAddress(){
             Authorization: `Bearer ${token}`
           }
         });
-        console.log(response.data,"ini address");
+        // console.log(response.data,"ini address");
         return response.data;
         
     } catch (error) {
         console.error(error);
         return undefined;
     }
+}
+
+export async function getUserAddressById(){
+    try {
+        const token = await getAuthToken();
+        console.log(token);
+
+        const response = await apiClient.get<ResponseSchema<any>>("/address/{id}", {
+          headers: { 
+            Authorization: `Bearer ${token}`
+          }
+        });
+        console.log(response.data,"ini address dari id");
+        return response.data;
+        
+    } catch (error) {
+        console.error(error);
+        return undefined;
+    }
+}
+
+
+export async function deleteUserAddress(productId: string){
+    const token = await getAuthToken();
+    console.log(token);
+
+    await apiClient.delete<ResponseSchema<any>>(`/address/${productId}`, {
+        headers: { 
+            Authorization: `Bearer ${token}`
+        }
+    });
+    // await apiClient.delete(`/address/${productId}`);
 }
 
 export async function logout(){

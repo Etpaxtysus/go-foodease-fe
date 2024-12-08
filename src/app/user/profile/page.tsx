@@ -4,10 +4,10 @@ import axios from "axios";
 import { ButtonPrimaryEnable } from "@/components/Button/Button";
 import { FaTrash } from "react-icons/fa6";
 import { MdOutlineGpsFixed } from "react-icons/md";
-import { getCurrentUser, getUserAddress } from "@/app/services/UserService";
+import { deleteUserAddress, getCurrentUser, getUserAddress } from "@/app/services/UserService";
 
 interface IAddress {
-  id: string;
+  ID: string;
   street: string;
   longitude: string;
   latitude: string;
@@ -46,6 +46,21 @@ export default function UserProfilePage() {
     fetchUserAddress();
   }, []); // Efek ini hanya dipanggil sekali ketika komponen dimuat
 
+
+  const UserAddressDelete = async (productId: string) => {
+    try {
+      // Menghapus alamat
+      await deleteUserAddress(productId);
+      console.log("Address deleted:", productId);
+      // Setelah berhasil, refresh halaman
+      window.location.reload();
+    } catch (error) {
+      console.error("Error deleting address:", error);
+    }
+     
+  };
+
+  // fetchUserAddress();
   // Render loading atau error jika data belum ada
   if (!userData) {
     return <div>Loading...</div>; // Menampilkan loading state sementara
@@ -77,23 +92,26 @@ export default function UserProfilePage() {
               <p className="text-m-h4 text-black font-bold lg:text-d-h4">Address</p>
             </div>
             {userAddress?.map((address) => (
-              <div key={"terserah"}>
+              <div key={address.ID}>
               <div className="flex w-full justify-between px-3 py-4 border-[1px] border-[#D2D2D2] rounded-md">
                 <div className="flex flex-col p-2.5 gap-2.5 text-m-b2">
+                  {/* <p>Id : {address.ID}</p> */}
                   <p >Address : {address.street}</p>
                   <p>Latitude : {address.latitude}</p>
                   <p>Longtitude : {address.longitude}</p>
                 </div>
                 <div className="flex flex-col p-2.5 items-center justify-start gap-4">
-                  <span className="text-m-h3 text-danger lg:text-m-h2"><button><FaTrash/></button></span>
+                  
+                  <span className="text-m-h3 text-danger lg:text-m-h2"><button onClick={() => UserAddressDelete(address.ID)}><FaTrash/></button></span>
                   <span className="text-m-h2 text-success-600 lg:text-m-h"><button><MdOutlineGpsFixed/></button></span>
                 </div>
               </div>
             </div>
             ))}
-            
-            
+          <a href="/user/profile/address">
             <ButtonPrimaryEnable text="Add New Address"/>
+          </a>
+           
           </div>
         </div>
       </div>
