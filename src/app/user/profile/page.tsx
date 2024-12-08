@@ -5,6 +5,7 @@ import { ButtonPrimaryEnable } from "@/components/Button/Button";
 import { FaTrash } from "react-icons/fa6";
 import { MdOutlineGpsFixed } from "react-icons/md";
 import { deleteUserAddress, getCurrentUser, getUserAddress } from "@/app/services/UserService";
+import { getAuthToken } from "@/app/services/AuthTokenService";
 
 interface IAddress {
   ID: string;
@@ -25,7 +26,7 @@ export default function UserProfilePage() {
       try {
         const response = await getCurrentUser();
         setUserData(response); // Simpan data yang diterima di state
-        console.log(response);
+        // console.log(response);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -37,7 +38,7 @@ export default function UserProfilePage() {
       try {
         const response = await getUserAddress();
         setUserAddress(response?.data); // Simpan data yang diterima di state
-        console.log(response);
+        // console.log(response);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -59,6 +60,35 @@ export default function UserProfilePage() {
     }
      
   };
+
+  const SetActiveAddress = async (addressId: string) => {
+    try {
+      // Mendapatkan token untuk autentikasi (sesuaikan jika perlu)
+      const token = await getAuthToken();
+  
+      // Mengirimkan permintaan PUT ke backend dengan ID address
+      const response = await axios.put(
+        `http://localhost:8888/api/address/${addressId}/active`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+  
+      console.log("Address set to active successfully:", response.data);
+      alert("Address has been set to active successfully!");
+  
+      // Refresh daftar alamat setelah berhasil
+      const updatedAddresses = await getUserAddress();
+      setUserAddress(updatedAddresses?.data);
+    } catch (error) {
+      console.error("Error setting active address:", error);
+      alert("Failed to set active address. Please try again.");
+    }
+  };
+  
 
   // fetchUserAddress();
   // Render loading atau error jika data belum ada
@@ -103,7 +133,7 @@ export default function UserProfilePage() {
                 <div className="flex flex-col p-2.5 items-center justify-start gap-4">
                   
                   <span className="text-m-h3 text-danger lg:text-m-h2"><button onClick={() => UserAddressDelete(address.ID)}><FaTrash/></button></span>
-                  <span className="text-m-h2 text-success-600 lg:text-m-h"><button><MdOutlineGpsFixed/></button></span>
+                  <span className="text-m-h2 text-success-600 lg:text-m-h"><button onClick={() => SetActiveAddress(address.ID)}><MdOutlineGpsFixed/></button></span>
                 </div>
               </div>
             </div>

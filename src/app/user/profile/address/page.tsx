@@ -22,7 +22,7 @@ export default function UserProfilePage() {
       try {
         const response = await getCurrentUser();
         setUserData(response); // Simpan data yang diterima di state
-        console.log(response);
+        // console.log(response);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -43,20 +43,20 @@ export default function UserProfilePage() {
     try {
         const token = await getAuthToken();
 
-      const response = await axios.post("http://localhost:8888/api/address/new", address, 
+        const response = await axios.post("http://localhost:8888/api/address/new", address, 
         {
             headers: { 
                 Authorization: `Bearer ${token}`
             }
         }
-      ); // Ganti URL dengan endpoint backend Anda
+      );
       console.log("Address saved successfully:", response.data);
       alert("Address has been saved successfully!");
     } catch (error) {
       console.error("Error saving address:", error);
       alert("Failed to save address. Please try again.");
     }
-    console.log(address);
+    // console.log(address);
   };
 
   if (!userData) {

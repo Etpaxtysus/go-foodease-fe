@@ -86,7 +86,7 @@ export async function getCurrentUser(){
 export async function getUserAddress(){
     try {
         const token = await getAuthToken();
-        console.log(token);
+        // console.log(token);
 
         const response = await apiClient.get<ResponseSchema<any>>("/address/all", {
           headers: { 
@@ -105,14 +105,14 @@ export async function getUserAddress(){
 export async function getUserAddressById(){
     try {
         const token = await getAuthToken();
-        console.log(token);
+        // console.log(token);
 
         const response = await apiClient.get<ResponseSchema<any>>("/address/{id}", {
           headers: { 
             Authorization: `Bearer ${token}`
           }
         });
-        console.log(response.data,"ini address dari id");
+        // console.log(response.data,"ini address dari id");
         return response.data;
         
     } catch (error) {
@@ -124,7 +124,7 @@ export async function getUserAddressById(){
 
 export async function deleteUserAddress(productId: string){
     const token = await getAuthToken();
-    console.log(token);
+    // console.log(token);
 
     await apiClient.delete<ResponseSchema<any>>(`/address/${productId}`, {
         headers: { 
