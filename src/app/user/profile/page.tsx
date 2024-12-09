@@ -1,11 +1,12 @@
 'use client';
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { ButtonPrimaryEnable } from "@/components/Button/Button";
+import { ButtonPrimaryEnable, ButtonSecondaryEnable } from "@/components/Button/Button";
 import { FaTrash } from "react-icons/fa6";
 import { MdOutlineGpsFixed } from "react-icons/md";
-import { deleteUserAddress, getCurrentUser, getUserAddress } from "@/app/services/UserService";
+import { deleteUserAddress, getCurrentUser, getUserAddress, logout } from "@/app/services/UserService";
 import { getAuthToken } from "@/app/services/AuthTokenService";
+import { Router } from "next/router";
 
 interface IAddress {
   ID: string;
@@ -47,6 +48,10 @@ export default function UserProfilePage() {
     fetchUserAddress();
   }, []); // Efek ini hanya dipanggil sekali ketika komponen dimuat
 
+  const handleLogOut = () => {
+    logout()
+    window.location.replace("/");
+  }
 
   const UserAddressDelete = async (productId: string) => {
     try {
@@ -141,6 +146,9 @@ export default function UserProfilePage() {
           <a href="/user/profile/address">
             <ButtonPrimaryEnable text="Add New Address"/>
           </a>
+          <button className="bg-red-500">
+            <ButtonSecondaryEnable onClick={handleLogOut} text="Logout"/>
+          </button>
            
           </div>
         </div>

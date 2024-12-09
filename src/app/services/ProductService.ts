@@ -37,11 +37,12 @@ export async function addNewProduct( newProductData: any ){
 export async function getNearestProductFromUserWithoutQuery(){
     try {
         const authToken = await getAuthToken()
-        const response = await apiClient.get<ResponseSchema<any>>("/product?distance=20000&limit=30&offset=0", {
+        const response = await apiClient.get<ResponseSchema<any>>("/product/private?distance=4000&limit=30&offset=0", {
             headers: {
                 Authorization: `Bearer ${authToken}`
             }
         })
+        console.log(response.data)
         return response.data.data
     } catch (error) {
         console.error(error)
@@ -52,6 +53,7 @@ export async function getNearestProductFromUserWithoutQuery(){
 export async function getPublicNearestProductWithoutQuery(){
     try {
         const response = await apiClient.get<ResponseSchema<any>>("/product/public?distance=20000&limit=30&offset=0")
+        console.log(response)
         return response.data.data
     } catch (error) {
         console.error(error)
@@ -84,6 +86,21 @@ export async function getAllStoreProducts(){
             }
         })
         console.log("response")
+        return response.data.data
+    } catch (error) {
+        console.error(error)
+        return null
+    }
+}
+
+export async function addProductToCart(product_id: string){
+    try {
+        const authToken = await getAuthToken()
+        const response = await apiClient.post<ResponseSchema<any>>(`/order/add`, {product_id}, {
+            headers: {
+                Authorization: `Bearer ${authToken}`
+            }
+        })
         return response.data.data
     } catch (error) {
         console.error(error)

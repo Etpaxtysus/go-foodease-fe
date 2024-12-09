@@ -38,7 +38,7 @@ function UserHomepage() {
 
   const getProductDisplayed = useCallback(async () => {
     if (currentUser == undefined) {
-      const publicProduct = await getPublicNearestProductWithoutQuery();
+      const publicProduct = await getNearestProductFromUserWithoutQuery();
       if (publicProduct) {
         setProductDisplayed(publicProduct);
       } else {
@@ -72,7 +72,7 @@ function UserHomepage() {
               originPrice={product.price_before.toString()}
               salePrice={product.price_after.toString()}
               location={product.street}
-              image_url={product.image_id}
+              image_url={""}
               rating={4.5}
             />
           ))

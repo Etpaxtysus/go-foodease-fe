@@ -50,8 +50,8 @@ function ProductCard(props: ProductCardProps) {
             className="object-cover mx-auto rounded-md lg:w-[268px] lg:h-[200px]"
           />
         </div>
-        <div className="flex flex-col w-min gap-[6px] text-left p-2 ">
-          <p className="text-m-h4 font-bold text-black truncate ... lg:text-d-h4">
+        <div className="flex flex-col w-min gap-[6px]  text-left p-2 ">
+          <p className="text-m-h4 font-bold text-black truncate overflow-hidden lg:text-d-h4">
             {productName}
           </p>
           <div className="flex flex-col gap-1.5">

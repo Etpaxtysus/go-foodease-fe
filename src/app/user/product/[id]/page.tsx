@@ -4,10 +4,11 @@ import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { ButtonPrimaryEnable } from "@/components/Button/Button";
 import React, { useCallback, useEffect, useState, useContext } from "react";
-import { getProductDetailsById } from "@/app/services/ProductService";
+import { addProductToCart, getProductDetailsById } from "@/app/services/ProductService";
 import { AuthContext } from "@/app/services/CustomerAuthContext";
 
 interface IProduct {
+  id: string;
   product_name: string;
   description: string;
   price_before: number;
@@ -16,19 +17,12 @@ interface IProduct {
   expired_time: string;
   stock: number;
   image_id: null;
-  store_details: {
-    store_id: string;
-    store_name: string;
-    store_address: {
-      street: string;
-      latitude: string;
-      longitude: string;
-    },
-  },
-  category: {
-    category_slug: string;
-    category_name: string;
-  },
+  store_name: string;
+  street: string;
+  address_latitude: string;
+  address_longitude: string;
+  slug: string;
+  category_name: string;
   updated_at: string;
   created_at: string;
 }
@@ -58,6 +52,11 @@ export default function DetailPage({ params }: any) {
     fetchProductDetails();
   }, [fetchProductDetails, currentUser]);
 
+  const handleAddToCart = async (product_id: string) => {
+    await addProductToCart(product_id)
+    alert("Product added to cart")
+  }
+
   return (
     <div className="flex w-[80%] justify-center my-12 mx-auto h-max ">
 
@@ -80,7 +79,7 @@ export default function DetailPage({ params }: any) {
                 <h1 className="text-m-h1 font-bold line-clamp-2 w-[90%] lg:text-d-h2">
                   {productDetails?.product_name}
                 </h1>
-                <p className="text-m-b1 lg:text-d-b1">{productDetails?.store_details.store_name}</p>
+                {/* <p className="text-m-b1 lg:text-d-b1">{productDetails!.store_name}</p> */}
                 <div className="flex gap-2 w-full items-center text-m-b1">
                   <div className="flex w-[40%] lg:w-[20%]">
                     <Rating readOnly value={4.5} itemStyles={customStyles} />
@@ -104,7 +103,7 @@ export default function DetailPage({ params }: any) {
               {productDetails?.description}
               </p>
             </div>
-            <ButtonPrimaryEnable text="Add to Cart" />
+            <ButtonPrimaryEnable onClick={() => handleAddToCart(productDetails!.id)} text="Add to Cart" />
           </div>
         </div>
       }

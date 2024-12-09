@@ -89,10 +89,10 @@ interface IProduct {
 
         
         <section id="products" className='flex flex-wrap justify-center p-4 lg:p-12'>
-          <div className="w-full flex justify-center items-center h-full p-4 md:p-8 text-black text-3xl sm:text-4xl md:text-5xl font-black font-['Nunito Sans'] leading-tight sm:leading-snug md:leading-[57.60px] mb-4 sm:mb-6 md:mb-[45px]">
+          <div className="w-[70%] flex justify-center items-center h-full p-4 md:p-8 text-black text-3xl sm:text-4xl md:text-5xl font-black font-['Nunito Sans'] leading-tight sm:leading-snug md:leading-[57.60px] mb-4 sm:mb-6 md:mb-[45px]">
             READY TO EAT
             </div>
-              <div className='grid gap-2 max-w-max gap-y-6 grid-cols-2 lg:grid-cols-4 lg:gap-4 '>
+              <div className='mx-[7%] grid gap-2 max-w-max gap-y-6 grid-cols-2 lg:grid-cols-4 lg:gap-4 '>
               {(productDisplayed?.length === 0 || !productDisplayed) ? (
                 <div>No Products Found</div>
                 ) : (
@@ -104,7 +104,7 @@ interface IProduct {
                       originPrice={product.price_before.toString()}
                       salePrice={product.price_after.toString()}
                       location={product.street}
-                      image_url={product.image_id}
+                      image_url={""}
                       rating={4.5}
                     />
                    ))

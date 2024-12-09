@@ -135,5 +135,17 @@ export async function deleteUserAddress(productId: string){
 }
 
 export async function logout(){
-    return deleteAuthToken()
+    deleteAuthToken()
 }
+
+export async function getUserCart() {
+    const token = await getAuthToken();
+    const response = await apiClient.get<ResponseSchema<any>>('/order', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    // console.log(response.data.data) ;
+    return response.data.data;
+}
+
