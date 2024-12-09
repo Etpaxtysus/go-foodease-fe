@@ -72,7 +72,7 @@ export default function DetailPage({ params }: any) {
               <h1 className="text-m-h1 font-bold line-clamp-2 w-[90%] lg:text-d-h2">
                 {productDetails?.product_name}
               </h1>
-              <p className="text-m-b1 lg:text-d-b1">{productDetails?.store_details.store_name}</p>
+              {/* <p className="text-m-b1 lg:text-d-b1">{"Puki"}</p> */}
               <div className="flex gap-2 w-full items-center text-m-b1">
                 <div className="flex w-[40%] lg:w-[20%]">
                   <Rating readOnly value={4.5} itemStyles={customStyles} />
